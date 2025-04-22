@@ -36,9 +36,9 @@ def warmup(r, num_keys, value_size):
 '''
 Mix some reads and writes with a ratio of 1:2
 
-1. Operate on 10K keys
-2. Perform a write to a String
-3. Perform two read operations on the same String££
+1. Operate on the specified number of keys
+2. Perform a write operation to a String
+3. Perform two read operations on the same String
 '''
 def run_sequential_workload_1_to_2(r_write, r_read, num_keys, value_size):
     for i in tqdm(range(num_keys), desc="Running workload"):
@@ -64,7 +64,3 @@ if __name__ == "__main__":
     print("Running the workload with a cached connection ...")
     r_uncached.flushdb()
     stopwatch(run_sequential_workload_1_to_2, r_uncached, r_cached, NUM_KEYS, VALUE_SIZE)
-
-
-
-
