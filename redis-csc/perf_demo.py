@@ -1,5 +1,4 @@
 from config import *
-from tqdm import tqdm
 import time
 import threading
 from enum import Enum
@@ -32,17 +31,6 @@ def stopwatch(func, *args, **kwargs):
     func(*args, **kwargs)
     end_time = time.perf_counter()
     print("The function '{}' took {:.4f} seconds.".format(func.__name__, end_time - start_time))
-
-
-
-'''
-Warm the keyspace up with a number of keys
-'''
-def warmup(r, num_keys, value_size):
-    for i in range(num_keys):
-        print(i)
-        r.set("key:{}".format(i), random_string(value_size))
-
 
 
 def run_workload(workload, num_workers, r_write, r_read, num_keys, value_size):
