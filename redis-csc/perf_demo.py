@@ -33,6 +33,9 @@ def stopwatch(func, *args, **kwargs):
     print("The function '{}' took {:.4f} seconds.".format(func.__name__, end_time - start_time))
 
 
+'''
+Run a workload with a given number of workers
+'''
 def run_workload(workload, num_workers, r_write, r_read, num_keys, value_size):
     workers = []
     keys_per_thread = int(num_keys / num_workers)
@@ -51,6 +54,7 @@ def run_workload(workload, num_workers, r_write, r_read, num_keys, value_size):
     # Wait until all workers are done
     for w in workers:
         w.join()
+
 '''
 Mix some reads and writes with a ratio of 1:2
 
@@ -63,7 +67,6 @@ def run_sequential_workload_1_to_2(worker_id, r_write, r_read, num_keys, value_s
         r_write.set("key:{}:{}".format(worker_id, i), random_string(value_size))
         r_read.get("key:{}:{}".format(worker_id, i))
         r_read.get("key:{}:{}".format(worker_id, i))
-
 
 
 
@@ -85,7 +88,7 @@ if __name__ == "__main__":
     stopwatch(run_workload, WORKLOAD, NUM_THREADS, r_write, r_uncached, NUM_KEYS, VALUE_SIZE)
 
     print("Enabling caching ...")
-    time.sleep(5)
+    time.sleep(20)
 
     print("Running the workload with a cached connection ...")
     stopwatch(run_workload, WORKLOAD, NUM_THREADS, r_write, r_cached, NUM_KEYS, VALUE_SIZE)
