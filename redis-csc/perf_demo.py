@@ -88,7 +88,7 @@ if __name__ == "__main__":
     time.sleep(5)
 
     print("Running the workload with a cached connection ...")
-    stopwatch(run_workload, WORKLOAD, NUM_THREADS, r_uncached, r_cached, NUM_KEYS, VALUE_SIZE)
+    stopwatch(run_workload, WORKLOAD, NUM_THREADS, r_write, r_cached, NUM_KEYS, VALUE_SIZE)
 
 
 
